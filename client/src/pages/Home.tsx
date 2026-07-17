@@ -93,6 +93,7 @@ const Home = () => {
           src="/images/backgroundMain.jpg" 
           alt="Background"
           className="w-full h-full object-cover"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-slate-400/20 via-slate-500/20 to-slate-600/20" />
       </div>
@@ -183,6 +184,7 @@ const Home = () => {
                     src="/images/adelard.png" 
                     alt="Adelard Borauzima"
                     className="w-full h-full object-cover"
+                    loading="eager"
                   />
                 </div>
               </div>
@@ -390,6 +392,7 @@ const Home = () => {
                     src={role.image}
                     alt={role.title}
                     className={`w-full h-full ${role.title === 'Artist' ? 'object-cover object-top' : role.title === 'Social Entrepreneur' ? 'object-cover object-center' : 'object-cover'}`}
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
@@ -426,6 +429,7 @@ const Home = () => {
                   src="/images/techEducation.jpeg"
                   alt="Tech Education Uganda"
                   className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute top-4 right-4">
@@ -458,9 +462,10 @@ const Home = () => {
             >
               <div className="relative h-80 md:h-[340px] overflow-hidden">
                 <img 
-                  src="/images/baobabSum.jpeg"
+                  src="/images/BaobabSum.jpeg"
                   alt="Baobab Summit Kenya"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute top-4 right-4">
@@ -496,6 +501,7 @@ const Home = () => {
                   src="/images/creativeExpression.jpeg"
                   alt="Creative Expression Uganda"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute top-4 right-4">
@@ -531,6 +537,7 @@ const Home = () => {
                   src="/images/umuziFestival.jpeg"
                   alt="AI Creative Space South Africa"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute top-4 right-4">
@@ -566,6 +573,7 @@ const Home = () => {
                   src="/images/meltonGermany.jpeg"
                   alt="Global Citizenship Germany"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute top-4 right-4">
@@ -601,6 +609,7 @@ const Home = () => {
                   src="/images/LeadershipUg.jpeg"
                   alt="Global Leadership Uganda"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute top-4 right-4">
