@@ -90,7 +90,7 @@ const Home = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src="/src/assets/images/backgroundMain.jpg" 
+          src="/images/backgroundMain.jpg" 
           alt="Background"
           className="w-full h-full object-cover"
         />
@@ -180,7 +180,7 @@ const Home = () => {
               <div className="relative w-full max-w-md">
                 <div className="aspect-[3/4] bg-gradient-to-br from-brand-tertiary to-brand-quaternary rounded-2xl shadow-2xl overflow-hidden">
                   <img 
-                    src="/src/assets/images/adelard.png" 
+                    src="/images/adelard.png" 
                     alt="Adelard Borauzima"
                     className="w-full h-full object-cover"
                   />
@@ -349,32 +349,32 @@ const Home = () => {
               { 
                 title: 'Artist', 
                 description: 'Expressing stories through creative work', 
-                image: '/src/assets/images/adelardSinging.jpeg'
+                image: '/images/adelardSinging.jpeg'
               },
               { 
                 title: 'Social Entrepreneur', 
                 description: 'Building solutions for social impact', 
-                image: '/src/assets/images/pitch.png'
+                image: '/images/pitch.png'
               },
               { 
                 title: 'Software Engineer', 
                 description: 'Creating immersive web applications', 
-                image: '/src/assets/images/softwareEngineering.png'
+                image: '/images/softwareEngineering.png'
               },
               { 
                 title: 'Artificial Intellignece Trainer', 
                 description: 'On of my Students projects for AI in data Analytics and Vizualization', 
-                image: '/src/assets/images/aiVizualization.png'
+                image: '/images/aiVizualization.png'
               },
               { 
                 title: 'Leadership as Service', 
                 description: 'Exploring and developing leadership potential among young people.', 
-                image: '/src/assets/images/Leadership.jpeg'
+                image: '/images/Leadership.jpeg'
               },
               { 
                 title: 'Intercultural Collaborator', 
                 description: 'Building bridges across cultures', 
-                image: '/src/assets/images/CulturalCollaboration.jpeg'
+                image: '/images/CulturalCollaboration.jpeg'
               },
             ].map((role, index) => (
               <motion.div
@@ -423,7 +423,7 @@ const Home = () => {
             >
                 <div className="relative h-80 md:h-[340px] overflow-hidden">
                 <img 
-                  src="/src/assets/images/techEducation.jpeg"
+                  src="/images/techEducation.jpeg"
                   alt="Tech Education Uganda"
                   className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
                 />
@@ -458,7 +458,7 @@ const Home = () => {
             >
               <div className="relative h-80 md:h-[340px] overflow-hidden">
                 <img 
-                  src="/src/assets/images/baobabSum.jpeg"
+                  src="/images/baobabSum.jpeg"
                   alt="Baobab Summit Kenya"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -493,7 +493,7 @@ const Home = () => {
             >
               <div className="relative h-80 md:h-[340px] overflow-hidden">
                 <img 
-                  src="/src/assets/images/creativeExpression.jpeg"
+                  src="/images/creativeExpression.jpeg"
                   alt="Creative Expression Uganda"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -528,7 +528,7 @@ const Home = () => {
             >
               <div className="relative h-80 md:h-[340px] overflow-hidden">
                 <img 
-                  src="/src/assets/images/umuziFestival.jpeg"
+                  src="/images/umuziFestival.jpeg"
                   alt="AI Creative Space South Africa"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -563,7 +563,7 @@ const Home = () => {
             >
               <div className="relative h-80 md:h-[340px] overflow-hidden">
                 <img 
-                  src="/src/assets/images/meltonGermany.jpeg"
+                  src="/images/meltonGermany.jpeg"
                   alt="Global Citizenship Germany"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -598,7 +598,7 @@ const Home = () => {
             >
               <div className="relative h-80 md:h-[340px] overflow-hidden">
                 <img 
-                  src="/src/assets/images/LeadershipUg.jpeg"
+                  src="/images/LeadershipUg.jpeg"
                   alt="Global Leadership Uganda"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
