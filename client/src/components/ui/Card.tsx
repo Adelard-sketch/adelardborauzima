@@ -1,6 +1,5 @@
 import { HTMLAttributes, forwardRef } from 'react';
 import { cn } from '@/utils/cn';
-import { motion } from 'framer-motion';
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   hover?: boolean;
@@ -9,18 +8,17 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className, hover = true, children, ...props }, ref) => {
     return (
-      <motion.div
+      <div
         ref={ref}
-        whileHover={hover ? { y: -8 } : undefined}
         className={cn(
           'bg-card rounded-xl border border-border p-6 transition-all duration-300',
-          hover && 'hover:shadow-xl',
+          hover && 'hover:shadow-xl hover:-translate-y-2',
           className
         )}
         {...props}
       >
         {children}
-      </motion.div>
+      </div>
     );
   }
 );

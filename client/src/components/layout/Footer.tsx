@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Linkedin, Facebook, Instagram, Github, Mail, Heart } from 'lucide-react';
+import { Linkedin, Facebook, Instagram, Github, Mail } from 'lucide-react';
 import { SOCIAL_LINKS } from '@/utils/constants';
 
 const Footer = () => {
