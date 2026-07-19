@@ -1,8 +1,10 @@
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, Linkedin, Facebook, Instagram, Github } from 'lucide-react';
+import { Mail, MapPin, Send, Linkedin, Facebook, Instagram, Github, Phone, Clock, ExternalLink } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import Input from '@/components/ui/Input';
 import Textarea from '@/components/ui/Textarea';
 import Button from '@/components/ui/Button';
@@ -28,18 +30,90 @@ const Contact = () => {
     resolver: zodResolver(contactSchema),
   });
 
+  // Initialize EmailJS and test connection
+  React.useEffect(() => {
+    emailjs.init('1gbFEtUs3I5G6yDOd');
+    console.log('EmailJS initialized successfully');
+    
+    // Test EmailJS availability
+    if (typeof emailjs.send === 'function') {
+      console.log('EmailJS is available and ready');
+    } else {
+      console.error('EmailJS is not properly loaded');
+    }
+  }, []);
+
+  const showNotification = (message: string, type: 'success' | 'error' = 'success') => {
+    // Set custom title for notifications
+    const originalTitle = document.title;
+    document.title = "Adelard's Management";
+    
+    // Create custom notification
+    const notification = document.createElement('div');
+    notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg max-w-md ${
+      type === 'success' 
+        ? 'bg-green-500 text-white' 
+        : 'bg-red-500 text-white'
+    }`;
+    notification.innerHTML = `
+      <div class="flex items-center space-x-2">
+        <div class="font-semibold">Adelard's Management</div>
+        <button onclick="this.parentElement.parentElement.remove()" class="ml-auto text-white hover:text-gray-200">✕</button>
+      </div>
+      <div class="mt-1">${message}</div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.remove();
+      }
+      document.title = originalTitle;
+    }, 5000);
+  };
+
   const onSubmit = async (data: ContactFormData) => {
-    console.log(data);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    alert('Message sent successfully!');
-    reset();
+    try {
+      console.log('Starting email send process...');
+      
+      const templateParams = {
+        to_name: 'Adelard',
+        to_email: 'adelborauzima@gmail.com',
+        from_name: data.name,
+        from_email: data.email,
+        reply_to: data.email,
+        subject: data.subject,
+        message: data.message
+      };
+      
+      console.log('Template params:', templateParams);
+      
+      const result = await emailjs.send(
+        'service_cba6cfx',
+        'template_ksa9nvf', 
+        templateParams,
+        '1gbFEtUs3I5G6yDOd'
+      );
+      
+      console.log('SUCCESS:', result);
+      showNotification('Thank you for your message! I will get back to you within 24 hours.', 'success');
+      reset();
+    } catch (error: any) {
+      console.error('FULL ERROR OBJECT:', error);
+      console.error('ERROR MESSAGE:', error?.message);
+      console.error('ERROR TEXT:', error?.text);
+      console.error('ERROR STATUS:', error?.status);
+      showNotification(`Error: ${error?.text || error?.message || 'Unknown error'}. Please try again or email me directly.`, 'error');
+    }
   };
 
   const socialIcons = [
-    { icon: Linkedin, href: SOCIAL_LINKS.linkedin, label: 'LinkedIn', color: 'hover:text-blue-600' },
-    { icon: Facebook, href: SOCIAL_LINKS.facebook, label: 'Facebook', color: 'hover:text-blue-600' },
-    { icon: Instagram, href: SOCIAL_LINKS.instagram, label: 'Instagram', color: 'hover:text-[#3182bd]' },
-    { icon: Github, href: SOCIAL_LINKS.github, label: 'GitHub', color: 'hover:text-gray-900' },
+    { icon: Linkedin, href: SOCIAL_LINKS.linkedin, label: 'LinkedIn', color: 'hover:text-[#0A66C2] hover:bg-[#0A66C2]/10' },
+    { icon: Facebook, href: SOCIAL_LINKS.facebook, label: 'Facebook', color: 'hover:text-[#1877F2] hover:bg-[#1877F2]/10' },
+    { icon: Instagram, href: SOCIAL_LINKS.instagram, label: 'Instagram', color: 'hover:text-[#E4405F] hover:bg-[#E4405F]/10' },
+    { icon: Github, href: SOCIAL_LINKS.github, label: 'GitHub', color: 'hover:text-[#181717] hover:bg-gray-100' },
   ];
 
   return (
@@ -47,44 +121,22 @@ const Contact = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src="/src/assets/images/backgroundMain.jpg" 
+          src="/images/backgroundMain.jpg" 
           alt="Background"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-400/20 via-slate-500/20 to-slate-600/20" />
       </div>
-
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-12 space-y-6">
         
-        {/* Header Card */}
+        {/* Header Card with Navbar only */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="w-full max-w-6xl bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden"
         >
-          {/* Navbar */}
           <PageNavbar />
-          
-          <div className="p-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="inline-block mb-4"
-          >
-            <span className="bg-[#3182bd] text-white px-6 py-2 rounded-lg font-semibold text-sm shadow-lg">
-              CONTACT
-            </span>
-          </motion.div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Let's <span className="text-[#3182bd]">Connect</span>
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Have a project in mind? Want to collaborate? Or just want to say hello? I'd love to hear from you.
-          </p>
-          </div>
         </motion.div>
 
         {/* Contact Content */}
@@ -101,45 +153,86 @@ const Contact = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 space-y-8"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-8 space-y-8 border border-gray-100"
             >
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+                <h2 className="text-2xl font-bold text-[#3182bd] mb-6">Get in Touch</h2>
                 <p className="text-gray-600 leading-relaxed mb-6">
-                  Whether you're looking for collaboration, coaching, speaking engagements, 
-                  or just want to connect, feel free to reach out. I typically respond within 24-48 hours.
+                  Whether you're interested in collaboration, coaching, consulting, or just want to connect about 
+                  innovative solutions for social impact, I'd love to hear from you. I typically respond within 24 hours.
                 </p>
               </div>
 
-              <div className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-gradient-to-r from-brand-tertiary to-brand-quaternary rounded-lg">
-                    <Mail className="w-6 h-6 text-[#3182bd]" />
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4 group">
+                  <div className="p-3 bg-gradient-to-br from-[#3182bd] to-[#7fcdbb] rounded-xl shadow-lg group-hover:shadow-xl transition-all">
+                    <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <a
-                      href={`mailto:${SOCIAL_LINKS.email}`}
-                      className="text-gray-600 hover:text-[#3182bd] transition-colors"
-                    >
-                      {SOCIAL_LINKS.email}
-                    </a>
+                    <div className="space-y-1">
+                      <a
+                        href="mailto:adelborauzima@gmail.com"
+                        className="text-gray-600 hover:text-[#3182bd] transition-colors flex items-center space-x-1"
+                      >
+                        <span>adelborauzima@gmail.com</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                      <a
+                        href="mailto:borauzima.adelard@ashesi.edu.gh"
+                        className="text-gray-500 hover:text-[#3182bd] transition-colors flex items-center space-x-1 text-sm"
+                      >
+                        <span>borauzima.adelard@ashesi.edu.gh</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-gradient-to-r from-brand-tertiary to-brand-quaternary rounded-lg">
-                    <MapPin className="w-6 h-6 text-[#3182bd]" />
+                <div className="flex items-start space-x-4 group">
+                  <div className="p-3 bg-gradient-to-br from-[#e34a33] to-[#edf8b1] rounded-xl shadow-lg group-hover:shadow-xl transition-all">
+                    <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Location</h3>
-                    <p className="text-gray-600">Accra, Ghana</p>
+                    <p className="text-gray-600">Accra, Ghana | Kampala, Uganda | Goma, DRCongo</p>
+                    <p className="text-sm text-gray-500">Available for global remote collaboration</p>
                   </div>
+                </div>
+                <div className="flex items-start space-x-4 group">
+                  <div className="p-3 bg-gradient-to-br from-[#7fcdbb] to-[#3182bd] rounded-xl shadow-lg group-hover:shadow-xl transition-all">
+                    <Clock className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-1">Response Time</h3>
+                    <p className="text-gray-600">Within 24 hours</p>
+                    <p className="text-sm text-gray-500">GMT timezone (flexible for global meetings)</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Services Section */}
+              <div className="border-t border-gray-200 pt-6">
+                <h3 className="font-semibold text-gray-900 mb-4">How I Can Help</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    'AI Training & Coaching',
+                    'Software Development',
+                    'Social Innovation',
+                    'Creative Projects',
+                    'Leadership Consulting',
+                    'Speaking Engagements'
+                  ].map((service) => (
+                    <div key={service} className="flex items-center space-x-2 text-sm">
+                      <div className="w-2 h-2 bg-gradient-to-r from-[#3182bd] to-[#e34a33] rounded-full"></div>
+                      <span className="text-gray-700">{service}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
               {/* Social Links */}
-              <div>
+              <div className="border-t border-gray-200 pt-6">
                 <h3 className="font-semibold text-gray-900 mb-4">Connect on Social Media</h3>
                 <div className="flex space-x-3">
                   {socialIcons.map(({ icon: Icon, href, label, color }) => (
@@ -150,7 +243,7 @@ const Contact = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`p-3 rounded-xl bg-gray-100 text-gray-600 transition-colors ${color}`}
+                      className={`p-3 rounded-xl bg-gray-50 text-gray-600 transition-all border border-gray-200 ${color}`}
                       aria-label={label}
                     >
                       <Icon className="w-5 h-5" />
@@ -159,62 +252,176 @@ const Contact = () => {
                 </div>
               </div>
             </motion.div>
-
             {/* Contact Form Card */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-8"
+              className="backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-100"
+              style={{ backgroundColor: '#deebf7' }}
             >
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-[#e34a33] mb-2">Send a Message</h2>
+                <p className="text-gray-600">
+                  Fill out the form below and I'll get back to you as soon as possible.
+                </p>
+              </div>
+
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <Input
-                  label="Name"
-                  placeholder="Your name"
-                  error={errors.name?.message}
-                  {...register('name')}
-                />
+                <style>
+                  {`
+                    .contact-form label {
+                      color: #000000 !important;
+                      font-weight: bold !important;
+                      font-size: 14px !important;
+                      text-shadow: 1px 1px 2px rgba(255,255,255,0.8) !important;
+                    }
+                  `}
+                </style>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="contact-form">
+                    <Input
+                      label="Name *"
+                      placeholder="Your full name"
+                      error={errors.name?.message}
+                      className="border-gray-300 focus:border-[#3182bd] focus:ring-[#3182bd]/20 bg-white text-black placeholder-gray-400"
+                      {...register('name')}
+                    />
+                  </div>
 
-                <Input
-                  label="Email"
-                  type="email"
-                  placeholder="your@email.com"
-                  error={errors.email?.message}
-                  {...register('email')}
-                />
+                  <div className="contact-form">
+                    <Input
+                      label="Email *"
+                      type="email"
+                      placeholder="your@email.com"
+                      error={errors.email?.message}
+                      className="border-gray-300 focus:border-[#3182bd] focus:ring-[#3182bd]/20 bg-white text-black placeholder-gray-400"
+                      {...register('email')}
+                    />
+                  </div>
+                </div>
 
-                <Input
-                  label="Subject"
-                  placeholder="What's this about?"
-                  error={errors.subject?.message}
-                  {...register('subject')}
-                />
+                <div className="contact-form">
+                  <Input
+                    label="Subject *"
+                    placeholder="What would you like to discuss?"
+                    error={errors.subject?.message}
+                    className="border-gray-300 focus:border-[#3182bd] focus:ring-[#3182bd]/20 bg-white text-black placeholder-gray-400"
+                    {...register('subject')}
+                  />
+                </div>
 
-                <Textarea
-                  label="Message"
-                  placeholder="Tell me more..."
-                  rows={6}
-                  error={errors.message?.message}
-                  {...register('message')}
-                />
-
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full bg-[#3182bd] hover:bg-[#3182bd]/90"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    'Sending...'
-                  ) : (
-                    <>
-                      Send Message
-                      <Send className="ml-2 w-5 h-5" />
-                    </>
-                  )}
-                </Button>
+                <div className="contact-form">
+                  <Textarea
+                    label="Message *"
+                    placeholder="Tell me about your project, ideas, or how I can help you..."
+                    rows={6}
+                    error={errors.message?.message}
+                    className="border-gray-300 focus:border-[#3182bd] focus:ring-[#3182bd]/20 bg-white text-black placeholder-gray-400"
+                    {...register('message')}
+                  />
+                </div>
+                <div className="space-y-4">
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className={`w-full font-semibold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-[1.02] ${
+                      isSubmitting 
+                        ? 'bg-white border-2 border-[#e34a33]' 
+                        : 'bg-[#3182bd] hover:bg-[#3182bd]/90 text-white'
+                    }`}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center">
+                        <div className="w-5 h-5 border-2 border-[#e34a33] border-t-transparent rounded-full animate-spin mr-2"></div>
+                        <span className="text-[#e34a33]">Sending Message...</span>
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center">
+                        Send Message
+                        <Send className="ml-2 w-5 h-5" />
+                      </span>
+                    )}
+                  </Button>
+                  
+                  <p className="text-sm text-gray-500 text-center">
+                    By sending this message, you agree to be contacted regarding your inquiry.
+                  </p>
+                </div>
               </form>
+
+              {/* Additional Info */}
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <div className="flex items-center justify-between text-sm text-gray-600">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span>Usually responds within 24 hours</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Clock className="w-4 h-4" />
+                    <span>GMT +0</span>
+                  </div>
+                </div>
+              </div>
             </motion.div>
+          </div>
+        </motion.div>
+        {/* Professional Footer Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="w-full max-w-6xl bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-100"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div className="space-y-2">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-[#3182bd] to-[#7fcdbb] rounded-xl mb-3">
+                <Clock className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="font-semibold text-gray-900">Quick Response</h3>
+              <p className="text-sm text-gray-600">Average response time of 24 hours for all inquiries</p>
+            </div>
+            
+            <div className="space-y-2">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-[#e34a33] to-[#edf8b1] rounded-xl mb-3">
+                <ExternalLink className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="font-semibold text-gray-900">Global Collaboration</h3>
+              <p className="text-sm text-gray-600">Open to remote projects and international partnerships</p>
+            </div>
+            
+            <div className="space-y-2">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-[#7fcdbb] to-[#3182bd] rounded-xl mb-3">
+                <Phone className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="font-semibold text-gray-900">Professional Support</h3>
+              <p className="text-sm text-gray-600">Dedicated to delivering high-quality solutions</p>
+            </div>
+          </div>
+          
+          <div className="mt-8 pt-6 border-t border-gray-200 text-center">
+            <p className="text-gray-600 text-sm">
+              Ready to collaborate? Let's turn your ideas into impactful solutions.
+            </p>
+            <div className="mt-4 flex justify-center space-x-4">
+              <a
+                href="mailto:adelborauzima@gmail.com"
+                className="inline-flex items-center px-4 py-2 bg-[#3182bd] hover:bg-[#3182bd]/90 text-white rounded-lg hover:shadow-lg transition-all text-sm font-medium"
+              >
+                <Mail className="w-4 h-4 mr-2" />
+                Direct Email
+              </a>
+              <a
+                href={SOCIAL_LINKS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all text-sm font-medium"
+              >
+                <Linkedin className="w-4 h-4 mr-2" />
+                LinkedIn
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>

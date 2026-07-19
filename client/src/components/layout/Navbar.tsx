@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Download } from 'lucide-react';
 import { NAV_LINKS } from '@/utils/constants';
 import { cn } from '@/utils/cn';
 
@@ -41,6 +41,21 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
+              <button
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = '/doc/adelCV.pdf';
+                  link.download = 'Adelard_Borauzima_CV.pdf';
+                  link.target = '_blank';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+                className="flex items-center space-x-1 text-sm font-medium text-gray-600 hover:text-[#e34a33] transition-colors cursor-pointer"
+              >
+                <Download className="w-4 h-4" />
+                <span>CV</span>
+              </button>
               <Link to="/contact">
                 <button className="bg-[#3182bd] text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-[#3182bd]/90 transition-all shadow-lg">
                   Contact
@@ -80,6 +95,21 @@ const Navbar = () => {
                     {link.name}
                   </Link>
                 ))}
+                <button
+                  onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = '/doc/adelCV.pdf';
+                    link.download = 'Adelard_Borauzima_CV.pdf';
+                    link.target = '_blank';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  className="flex items-center space-x-2 py-2 text-base font-medium text-gray-600 hover:text-[#e34a33] transition-colors cursor-pointer"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Download CV</span>
+                </button>
               </div>
             </motion.div>
           )}
@@ -109,6 +139,14 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
+          <a
+            href="/doc/adelCV.pdf"
+            download="Adelard_Borauzima_CV.pdf"
+            className="flex items-center space-x-1 text-sm font-medium text-gray-600 hover:text-[#e34a33] transition-colors"
+          >
+            <Download className="w-4 h-4" />
+            <span>CV</span>
+          </a>
           <Link to="/contact">
             <button className="bg-[#3182bd] text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-[#3182bd]/90 transition-all shadow-lg">
               Contact
@@ -141,6 +179,14 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+            <a
+              href="/doc/adelCV.pdf"
+              download="Adelard_Borauzima_CV.pdf"
+              className="flex items-center space-x-2 py-3 text-base font-medium text-gray-600 hover:text-[#e34a33] transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              <span>Download CV</span>
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

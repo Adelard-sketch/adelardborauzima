@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Award, Globe, Heart, Zap, Briefcase, GraduationCap, Users, Lightbulb } from 'lucide-react';
+import { Award, Globe, Heart, Zap, Briefcase, GraduationCap, Users, Lightbulb, Shield, Sword, Mountain, BookOpen, Music, School, UserCheck, Bot } from 'lucide-react';
 import PageNavbar from '@/components/layout/PageNavbar';
 
 const About = () => {
@@ -8,6 +8,10 @@ const About = () => {
     { icon: Globe, title: 'Global Impact', description: 'Creating change that transcends borders' },
     { icon: Zap, title: 'Innovation', description: 'Pushing boundaries with technology and creativity' },
     { icon: Award, title: 'Excellence', description: 'Committed to quality and continuous growth' },
+    { icon: Shield, title: 'Integrity', description: 'Acting with honesty, transparency, and ethical principles' },
+    { icon: Sword, title: 'Courage', description: 'Taking bold steps to address challenges and create change' },
+    { icon: Mountain, title: 'Resilience', description: 'Overcoming obstacles with determination and strength' },
+    { icon: BookOpen, title: 'Life Long Learning', description: 'Continuously growing through knowledge and experience' },
   ];
 
   const experiences = [
@@ -35,6 +39,30 @@ const About = () => {
       organization: 'GHEA21',
       description: 'Global fellowship focused on youth empowerment and social change',
     },
+    {
+      icon: Music,
+      title: 'Founder and Former Manager',
+      organization: 'The Peacemakers',
+      description: 'Empowering youth and children from refugee backgrounds to use talent for healing, self-discovery and unlocking opportunities',
+    },
+    {
+      icon: School,
+      title: 'Educational Focal Person',
+      organization: 'Education Cannot Wait - CIYOTA',
+      description: 'Multi-year resilience program in Kyangwali refugee settlement, empowering young refugees and implementing social entrepreneurial-leadership and active non-violence curriculum',
+    },
+    {
+      icon: UserCheck,
+      title: 'Scholars Council Representative',
+      organization: 'Mastercard Foundation',
+      description: 'Representing Ashesi University students at the council while collaborating with foundation partners\' institutions across the globe to improve scholars\' well-being and experiences',
+    },
+    {
+      icon: Bot,
+      title: 'Artificial Intelligence Coach and Facilitator',
+      organization: 'AI Education & Training',
+      description: 'Exploring artificial intelligence effectiveness in workflows, sharing knowledge around chatbots, agentic engineering, data visualization and more using different AI tools',
+    },
   ];
 
   return (
@@ -42,7 +70,7 @@ const About = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
-          src="/src/assets/images/backgroundMain.jpg" 
+          src="/images/backgroundMain.jpg" 
           alt="Background"
           className="w-full h-full object-cover"
         />
@@ -71,7 +99,7 @@ const About = () => {
                 transition={{ delay: 0.3 }}
                 className="inline-block mb-6"
               >
-                <span className="bg-[#3182bd] text-white px-6 py-2 rounded-lg font-semibold text-sm shadow-lg">
+                <span className="bg-[#e6550d] text-white px-6 py-2 rounded-lg font-semibold text-sm shadow-lg font-serif">
                   ABOUT ME
                 </span>
               </motion.div>
@@ -80,32 +108,32 @@ const About = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight"
+                className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight font-serif"
               >
-                Artist | Social Entrepreneur | Computer Scientist
+                Creative | Social Entrepreneur | Computer Scientist | Global Citizen | Leader & Follower
               </motion.h1>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="space-y-4 text-gray-600 text-base leading-relaxed"
+                className="space-y-4 text-gray-600 text-base leading-relaxed font-serif"
               >
-                <p>
-                  I am a <span className="font-semibold text-gray-900">social entrepreneur</span>, 
-                  <span className="font-semibold text-gray-900"> artist</span>, and 
-                  <span className="font-semibold text-gray-900"> computer scientist</span> passionate 
-                  about empowering young people from marginalized communities through technology, 
-                  creativity, and education.
+                <p className="text-justify">
+                  I have a deep <span className="font-semibold text-gray-900">passion</span>, for 
+                  <span className="font-semibold text-gray-900"> artistic expression</span>, and 
+                  <span className="font-semibold text-gray-900"> tech </span>
+                  empowering young people globally especially from marginalized communities using a gol in them for healing 
+                  and archieve dreams.
                 </p>
 
-                <p>
-                  As <span className="font-semibold text-[#3182bd]">Co-Founder and CEO of Reliance Sou 
+                <p className="text-justify">
+                  As <span className="font-semibold text-[#e6550d]">Co-Founder and CEO of Reliance Sou 
                   International Youth Foundation</span>, I lead initiatives that promote digital skills, 
                   self-reliance, entrepreneurship, and community impact across Africa.
                 </p>
 
-                <p>
+                <p className="text-justify">
                   My work focuses on leveraging innovation, storytelling, and technology to create 
                   opportunities for youth and drive sustainable social change.
                 </p>
@@ -122,8 +150,8 @@ const About = () => {
               <div className="relative w-full max-w-md">
                 <div className="aspect-[3/4] bg-gradient-to-br from-brand-tertiary to-brand-quaternary rounded-2xl shadow-2xl overflow-hidden">
                   <img 
-                    src="/src/assets/images/adelardSinging.jpeg" 
-                    alt="Adelard Borauzima Singing"
+                    src="/images/global.png" 
+                    alt="Adelard Borauzima"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -139,23 +167,17 @@ const About = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="w-full max-w-6xl bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-8"
         >
-          <div className="space-y-4 text-gray-600 text-base leading-relaxed">
-            <p>
-              I am a <span className="font-semibold text-[#3182bd]">Melton Foundation Fellow</span> and 
-              a <span className="font-semibold text-[#3182bd]">Global Fellow of GHEA21</span>, and I 
+          <div className="space-y-4 text-gray-600 text-base leading-relaxed font-serif">
+            <p className="text-justify">
+              I am a <span className="font-semibold text-[#e6550d]">Melton Foundation Fellow</span> and 
+              a <span className="font-semibold text-[#e6550d]">Global Fellow of GHEA21</span>, and I 
               previously served as a representative on the 
-              <span className="font-semibold text-[#3182bd]"> Mastercard Foundation Scholars Council</span>.
+              <span className="font-semibold text-[#e6550d]"> Mastercard Foundation Scholars Council</span>.
             </p>
 
-            <p>
-              I am currently pursuing <span className="font-semibold text-[#3182bd]">Computer Science 
-              at Ashesi University</span>, where I combine my technical skills with my passion for 
-              social impact.
-            </p>
-
-            <p>
+            <p className="text-justify">
               Through my work, I strive to build innovative solutions that create opportunities for 
-              youth and drive social impact across Africa, using technology as a tool for empowerment 
+              youth and drive social impact across Africa, using technology and art as tools for empowerment 
               and positive change.
             </p>
           </div>
@@ -168,7 +190,7 @@ const About = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="w-full max-w-6xl"
         >
-          <h2 className="text-3xl font-bold text-white text-center mb-6">Experience & Roles</h2>
+          <h2 className="text-3xl font-bold text-white text-center mb-6 font-serif">Experience & Roles</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {experiences.map((exp, index) => (
               <motion.div
@@ -180,13 +202,13 @@ const About = () => {
                 className="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg"
               >
                 <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-[#3182bd] rounded-lg flex-shrink-0">
+                  <div className={`p-3 ${index % 2 === 0 ? 'bg-[#3182bd]' : 'bg-[#e6550d]'} rounded-lg flex-shrink-0`}>
                     <exp.icon className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">{exp.title}</h3>
-                    <p className="text-[#3182bd] font-medium text-sm mb-2">{exp.organization}</p>
-                    <p className="text-gray-600 text-sm">{exp.description}</p>
+                    <h3 className="text-lg font-bold text-gray-900 mb-1 font-serif">{exp.title}</h3>
+                    <p className={`${index % 2 === 0 ? 'text-[#3182bd]' : 'text-[#e6550d]'} font-medium text-sm mb-2 font-serif`}>{exp.organization}</p>
+                    <p className="text-gray-600 text-sm text-justify font-serif">{exp.description}</p>
                   </div>
                 </div>
               </motion.div>
@@ -201,8 +223,8 @@ const About = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="w-full max-w-6xl pb-12"
         >
-          <h2 className="text-3xl font-bold text-white text-center mb-6">Core Values</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <h2 className="text-3xl font-bold text-white text-center mb-6 font-serif">Core Values</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {values.map(({ icon: Icon, title, description }, index) => (
               <motion.div
                 key={title}
@@ -212,11 +234,11 @@ const About = () => {
                 whileHover={{ y: -4 }}
                 className="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg text-center"
               >
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-brand-tertiary to-brand-quaternary mb-4">
-                  <Icon className="w-7 h-7 text-[#3182bd]" />
+                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-full ${index % 2 === 0 ? 'bg-[#3182bd]' : 'bg-[#e6550d]'} mb-4`}>
+                  <Icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
-                <p className="text-gray-600 text-sm">{description}</p>
+                <h3 className="text-lg font-bold text-gray-900 mb-2 font-serif">{title}</h3>
+                <p className="text-gray-600 text-sm text-justify font-serif">{description}</p>
               </motion.div>
             ))}
           </div>

@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { LayoutDashboard, FileText, Briefcase, Image, LogOut } from 'lucide-react';
+import { LayoutDashboard, Briefcase, Image, LogOut } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { cn } from '@/utils/cn';
@@ -23,7 +23,6 @@ const AdminLayout = () => {
 
   const navItems = [
     { icon: LayoutDashboard, label: 'Dashboard', path: '/admin/dashboard' },
-    { icon: FileText, label: 'Blog Posts', path: '/admin/blog' },
     { icon: Briefcase, label: 'Projects', path: '/admin/projects' },
     { icon: Image, label: 'Gallery', path: '/admin/gallery' },
   ];

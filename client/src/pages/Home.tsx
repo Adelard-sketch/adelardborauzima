@@ -68,6 +68,8 @@ const AnimatedCounter = ({ end, label, delay = 0 }: { end: number; label: string
 };
 
 const Home = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
   const stats = [
     { value: 6, label: 'Years of Experience' },
     { value: 10, label: 'Projects Completed' },
@@ -113,7 +115,7 @@ const Home = () => {
                 <div className="w-12 h-12 bg-[#3182bd] rounded-full flex items-center justify-center shadow-lg">
                   <span className="text-white font-bold text-xl">B</span>
                 </div>
-                <span className="font-bold text-gray-900 text-xl hidden sm:block">Adelard</span>
+                <span className="font-bold text-gray-900 text-xl">Adelard</span>
               </Link>
 
               <div className="hidden md:flex items-center space-x-8">
@@ -133,12 +135,45 @@ const Home = () => {
                 </Link>
               </div>
 
-              <button className="md:hidden p-2 rounded-lg bg-[#e6550d] text-white hover:bg-[#e6550d]/90 transition-all">
+              <button 
+                className="md:hidden p-2 rounded-lg bg-[#e6550d] text-white hover:bg-[#e6550d]/90 transition-all"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
             </div>
+
+            {/* Mobile Menu */}
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="md:hidden mt-2 py-3 border-t border-gray-200 bg-white/95 backdrop-blur-sm"
+              >
+                <div className="flex flex-col space-y-1">
+                  {NAV_LINKS.map((link) => (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      className="text-sm font-medium text-gray-700 hover:text-[#e6550d] hover:bg-gray-50 transition-all px-4 py-2 rounded-md font-serif"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                  <div className="pt-2 px-4">
+                    <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                      <button className="bg-[#e6550d] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#e6550d]/90 transition-all shadow-sm w-full font-serif">
+                        Contact
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            )}
           </div>
           {/* Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
@@ -154,9 +189,9 @@ const Home = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
-                className="mb-6"
+                className="mb-6 flex justify-center"
               >
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2">
                   {socialIcons.map(({ icon: Icon, href, label, color }, index) => (
                     <motion.a
                       key={label}
@@ -168,10 +203,10 @@ const Home = () => {
                       transition={{ delay: 0.9 + index * 0.1 }}
                       whileHover={{ scale: 1.15, y: -3 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`p-3 rounded-xl bg-white/90 ${color} transition-all shadow-md hover:shadow-lg`}
+                      className={`p-2 rounded-lg bg-white/90 ${color} transition-all shadow-md hover:shadow-lg`}
                       aria-label={label}
                     >
-                      <Icon className="w-5 h-5" />
+                      <Icon className="w-4 h-4" />
                     </motion.a>
                   ))}
                 </div>
@@ -196,16 +231,24 @@ const Home = () => {
                 transition={{ delay: 1.0 }}
                 className="mt-6"
               >
-                <motion.a
-                  href="/cv.pdf"
-                  download="Adelard_Borauzima_CV.pdf"
+                <motion.button
+                  onClick={() => {
+                    // Create a direct link to the PDF and trigger download
+                    const link = document.createElement('a');
+                    link.href = '/doc/adelCV.pdf';
+                    link.download = 'Adelard_Borauzima_CV.pdf';
+                    link.target = '_blank';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center space-x-2 bg-[#e6550d] text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-[#e6550d]/90 transition-all font-serif"
+                  className="flex items-center space-x-2 bg-[#e6550d] text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-[#e6550d]/90 transition-all font-serif cursor-pointer"
                 >
                   <Download className="w-5 h-5" />
                   <span>Download CV</span>
-                </motion.a>
+                </motion.button>
               </motion.div>
             </motion.div>
 

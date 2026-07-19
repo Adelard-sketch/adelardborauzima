@@ -26,9 +26,7 @@ export const NAV_LINKS = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
   { name: 'Projects', path: '/projects' },
-  { name: 'Blog', path: '/blog' },
   { name: 'Gallery', path: '/gallery' },
-  { name: 'Speaking', path: '/speaking' },
 ];
 
 export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
