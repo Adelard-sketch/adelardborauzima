@@ -65,7 +65,7 @@ const Navbar = () => {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-gray-100"
+              className="md:hidden p-2 rounded-lg hover:bg-orange-50 text-[#e34a33] hover:text-[#d73527] transition-colors"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -95,6 +95,17 @@ const Navbar = () => {
                     {link.name}
                   </Link>
                 ))}
+                <Link
+                  to="/contact"
+                  className={cn(
+                    'block py-2 text-base font-medium',
+                    location.pathname === '/contact'
+                      ? 'text-[#3182bd]'
+                      : 'text-gray-600'
+                  )}
+                >
+                  Contact
+                </Link>
                 <button
                   onClick={() => {
                     const link = document.createElement('a');
@@ -156,7 +167,7 @@ const Navbar = () => {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 rounded-lg hover:bg-gray-100"
+          className="md:hidden p-2 rounded-lg hover:bg-orange-50 text-[#e34a33] hover:text-[#d73527] transition-colors"
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -179,6 +190,12 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+            <Link
+              to="/contact"
+              className="block py-3 text-base font-medium text-gray-600 hover:text-gray-900"
+            >
+              Contact
+            </Link>
             <a
               href="/doc/adelCV.pdf"
               download="Adelard_Borauzima_CV.pdf"
