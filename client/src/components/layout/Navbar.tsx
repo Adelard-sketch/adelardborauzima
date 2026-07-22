@@ -4,10 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Download } from 'lucide-react';
 import { NAV_LINKS } from '@/utils/constants';
 import { cn } from '@/utils/cn';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
 
   useEffect(() => {
     setIsOpen(false);
@@ -27,20 +29,50 @@ const Navbar = () => {
             </Link>
 
             <div className="hidden md:flex items-center space-x-8">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={cn(
-                    'text-sm font-medium transition-colors',
-                    location.pathname === link.path
-                      ? 'text-[#3182bd]'
-                      : 'text-gray-600 hover:text-gray-900'
-                  )}
-                >
-                  {link.name}
-                </Link>
-              ))}
+              <Link
+                to="/"
+                className={cn(
+                  'text-sm font-medium transition-colors',
+                  location.pathname === '/'
+                    ? 'text-[#3182bd]'
+                    : 'text-gray-600 hover:text-gray-900'
+                )}
+              >
+                {t('home')}
+              </Link>
+              <Link
+                to="/about"
+                className={cn(
+                  'text-sm font-medium transition-colors',
+                  location.pathname === '/about'
+                    ? 'text-[#3182bd]'
+                    : 'text-gray-600 hover:text-gray-900'
+                )}
+              >
+                {t('about')}
+              </Link>
+              <Link
+                to="/projects"
+                className={cn(
+                  'text-sm font-medium transition-colors',
+                  location.pathname === '/projects'
+                    ? 'text-[#3182bd]'
+                    : 'text-gray-600 hover:text-gray-900'
+                )}
+              >
+                {t('projects')}
+              </Link>
+              <Link
+                to="/gallery"
+                className={cn(
+                  'text-sm font-medium transition-colors',
+                  location.pathname === '/gallery'
+                    ? 'text-[#3182bd]'
+                    : 'text-gray-600 hover:text-gray-900'
+                )}
+              >
+                {t('gallery')}
+              </Link>
               <button
                 onClick={() => {
                   const link = document.createElement('a');
@@ -58,7 +90,7 @@ const Navbar = () => {
               </button>
               <Link to="/contact">
                 <button className="bg-[#3182bd] text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-[#3182bd]/90 transition-all shadow-lg">
-                  Contact
+                  {t('contact')}
                 </button>
               </Link>
             </div>
@@ -81,20 +113,50 @@ const Navbar = () => {
               className="md:hidden bg-white border-t border-gray-200"
             >
               <div className="px-4 py-6 space-y-4">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className={cn(
-                      'block py-2 text-base font-medium',
-                      location.pathname === link.path
-                        ? 'text-[#3182bd]'
-                        : 'text-gray-600'
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
+                <Link
+                  to="/"
+                  className={cn(
+                    'block py-2 text-base font-medium',
+                    location.pathname === '/'
+                      ? 'text-[#3182bd]'
+                      : 'text-gray-600'
+                  )}
+                >
+                  {t('home')}
+                </Link>
+                <Link
+                  to="/about"
+                  className={cn(
+                    'block py-2 text-base font-medium',
+                    location.pathname === '/about'
+                      ? 'text-[#3182bd]'
+                      : 'text-gray-600'
+                  )}
+                >
+                  {t('about')}
+                </Link>
+                <Link
+                  to="/projects"
+                  className={cn(
+                    'block py-2 text-base font-medium',
+                    location.pathname === '/projects'
+                      ? 'text-[#3182bd]'
+                      : 'text-gray-600'
+                  )}
+                >
+                  {t('projects')}
+                </Link>
+                <Link
+                  to="/gallery"
+                  className={cn(
+                    'block py-2 text-base font-medium',
+                    location.pathname === '/gallery'
+                      ? 'text-[#3182bd]'
+                      : 'text-gray-600'
+                  )}
+                >
+                  {t('gallery')}
+                </Link>
                 <Link
                   to="/contact"
                   className={cn(
@@ -104,7 +166,7 @@ const Navbar = () => {
                       : 'text-gray-600'
                   )}
                 >
-                  Contact
+                  {t('contact')}
                 </Link>
                 <button
                   onClick={() => {
@@ -119,7 +181,7 @@ const Navbar = () => {
                   className="flex items-center space-x-2 py-2 text-base font-medium text-gray-600 hover:text-[#e34a33] transition-colors cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
-                  <span>Download CV</span>
+                  <span>{t('downloadCV')}</span>
                 </button>
               </div>
             </motion.div>
@@ -141,15 +203,30 @@ const Navbar = () => {
         </Link>
 
         <div className="hidden md:flex items-center space-x-8">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
+          <Link
+            to="/"
+            className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            {t('home')}
+          </Link>
+          <Link
+            to="/about"
+            className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            {t('about')}
+          </Link>
+          <Link
+            to="/projects"
+            className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            {t('projects')}
+          </Link>
+          <Link
+            to="/gallery"
+            className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            {t('gallery')}
+          </Link>
           <a
             href="/doc/adelCV.pdf"
             download="Adelard_Borauzima_CV.pdf"
@@ -160,7 +237,7 @@ const Navbar = () => {
           </a>
           <Link to="/contact">
             <button className="bg-[#3182bd] text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-[#3182bd]/90 transition-all shadow-lg">
-              Contact
+              {t('contact')}
             </button>
           </Link>
         </div>
@@ -181,20 +258,35 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -10 }}
             className="md:hidden mt-4 bg-white rounded-xl shadow-lg p-4"
           >
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className="block py-3 text-base font-medium text-gray-600 hover:text-gray-900"
-              >
-                {link.name}
-              </Link>
-            ))}
+            <Link
+              to="/"
+              className="block py-3 text-base font-medium text-gray-600 hover:text-gray-900"
+            >
+              {t('home')}
+            </Link>
+            <Link
+              to="/about"
+              className="block py-3 text-base font-medium text-gray-600 hover:text-gray-900"
+            >
+              {t('about')}
+            </Link>
+            <Link
+              to="/projects"
+              className="block py-3 text-base font-medium text-gray-600 hover:text-gray-900"
+            >
+              {t('projects')}
+            </Link>
+            <Link
+              to="/gallery"
+              className="block py-3 text-base font-medium text-gray-600 hover:text-gray-900"
+            >
+              {t('gallery')}
+            </Link>
             <Link
               to="/contact"
               className="block py-3 text-base font-medium text-gray-600 hover:text-gray-900"
             >
-              Contact
+              {t('contact')}
             </Link>
             <a
               href="/doc/adelCV.pdf"
@@ -202,7 +294,7 @@ const Navbar = () => {
               className="flex items-center space-x-2 py-3 text-base font-medium text-gray-600 hover:text-[#e34a33] transition-colors"
             >
               <Download className="w-4 h-4" />
-              <span>Download CV</span>
+              <span>{t('downloadCV')}</span>
             </a>
           </motion.div>
         )}

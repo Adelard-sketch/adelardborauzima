@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 import { ExternalLink, Github, Instagram, Facebook, Linkedin, Mail } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import PageNavbar from '@/components/layout/PageNavbar';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Custom TikTok Icon Component
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -11,6 +13,12 @@ const TikTokIcon = ({ className }: { className?: string }) => (
 );
 
 const Projects = () => {
+  const { t } = useLanguage();
+  
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const projects = [
     {
@@ -164,14 +172,14 @@ const Projects = () => {
             className="inline-block mb-4"
           >
             <span className="bg-[#e6550d] text-white px-6 py-2 rounded-lg font-semibold text-sm shadow-lg font-serif">
-              PROJECTS & WORK
+              {t('projectsWork')}
             </span>
           </motion.div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-serif">
-            Building <span className="text-[#3182bd]">Impact</span>
+            {t('buildingImpact')}
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto font-serif">
-            A collection of projects that blend technology, creativity, and social impact to create meaningful change
+            {t('projectsDescription')}
           </p>
           </div>
         </motion.div>
@@ -255,7 +263,7 @@ const Projects = () => {
                         <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[120px]">
                           <Button size="sm" className={`w-full ${index % 2 === 0 ? 'bg-[#3182bd] hover:bg-[#3182bd]/90' : 'bg-[#e6550d] hover:bg-[#e6550d]/90'} font-serif text-white`}>
                             <ExternalLink className="w-4 h-4 mr-2" />
-                            Visit Project
+                            {t('viewProject')}
                           </Button>
                         </a>
                       )}

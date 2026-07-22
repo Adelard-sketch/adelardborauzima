@@ -10,6 +10,7 @@ import Textarea from '@/components/ui/Textarea';
 import Button from '@/components/ui/Button';
 import { SOCIAL_LINKS } from '@/utils/constants';
 import PageNavbar from '@/components/layout/PageNavbar';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -21,6 +22,8 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const Contact = () => {
+  const { t } = useLanguage();
+  
   const {
     register,
     handleSubmit,
@@ -156,10 +159,9 @@ const Contact = () => {
               className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-8 space-y-8 border border-gray-100"
             >
               <div>
-                <h2 className="text-2xl font-bold text-[#3182bd] mb-6">Get in Touch</h2>
+                <h2 className="text-2xl font-bold text-[#3182bd] mb-6">{t('getInTouch')}</h2>
                 <p className="text-gray-600 leading-relaxed mb-6">
-                  Whether you're interested in collaboration, coaching, consulting, or just want to connect about 
-                  innovative solutions for social impact, I'd love to hear from you. I typically respond within 24 hours.
+                  {t('contactDescription')}
                 </p>
               </div>
 
@@ -169,7 +171,7 @@ const Contact = () => {
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1">{t('email_label')}</h3>
                     <div className="space-y-1">
                       <a
                         href="mailto:adelborauzima@gmail.com"
@@ -194,9 +196,9 @@ const Contact = () => {
                     <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Location</h3>
-                    <p className="text-gray-600">Accra, Ghana | Kampala, Uganda | Goma, DRCongo</p>
-                    <p className="text-sm text-gray-500">Available for global remote collaboration</p>
+                    <h3 className="font-semibold text-gray-900 mb-1">{t('location')}</h3>
+                    <p className="text-gray-600">{t('locationDesc')}</p>
+                    <p className="text-sm text-gray-500">{t('locationNote')}</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4 group">
@@ -204,16 +206,16 @@ const Contact = () => {
                     <Clock className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Response Time</h3>
-                    <p className="text-gray-600">Within 24 hours</p>
-                    <p className="text-sm text-gray-500">GMT timezone (flexible for global meetings)</p>
+                    <h3 className="font-semibold text-gray-900 mb-1">{t('responseTime')}</h3>
+                    <p className="text-gray-600">{t('responseTimeDesc')}</p>
+                    <p className="text-sm text-gray-500">{t('responseTimeNote')}</p>
                   </div>
                 </div>
               </div>
 
               {/* Services Section */}
               <div className="border-t border-gray-200 pt-6">
-                <h3 className="font-semibold text-gray-900 mb-4">How I Can Help</h3>
+                <h3 className="font-semibold text-gray-900 mb-4">{t('howICanHelp')}</h3>
                 <div className="grid grid-cols-2 gap-3">
                   {[
                     'AI Training & Coaching',
@@ -233,7 +235,7 @@ const Contact = () => {
 
               {/* Social Links */}
               <div className="border-t border-gray-200 pt-6">
-                <h3 className="font-semibold text-gray-900 mb-4">Connect on Social Media</h3>
+                <h3 className="font-semibold text-gray-900 mb-4">{t('connectOnSocial')}</h3>
                 <div className="flex space-x-3">
                   {socialIcons.map(({ icon: Icon, href, label, color }) => (
                     <motion.a
@@ -261,9 +263,9 @@ const Contact = () => {
               style={{ backgroundColor: '#deebf7' }}
             >
               <div className="mb-6">
-                <h2 className="text-2xl font-bold text-[#e34a33] mb-2">Send a Message</h2>
+                <h2 className="text-2xl font-bold text-[#e34a33] mb-2">{t('sendMessage')}</h2>
                 <p className="text-gray-600">
-                  Fill out the form below and I'll get back to you as soon as possible.
+                  {t('contactDescription')}
                 </p>
               </div>
 
@@ -281,7 +283,7 @@ const Contact = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="contact-form">
                     <Input
-                      label="Name *"
+                      label={t('name_label') + ' *'}
                       placeholder="Your full name"
                       error={errors.name?.message}
                       className="border-gray-300 focus:border-[#3182bd] focus:ring-[#3182bd]/20 bg-white text-black placeholder-gray-400"
@@ -291,7 +293,7 @@ const Contact = () => {
 
                   <div className="contact-form">
                     <Input
-                      label="Email *"
+                      label={t('email_label') + ' *'}
                       type="email"
                       placeholder="your@email.com"
                       error={errors.email?.message}
@@ -303,7 +305,7 @@ const Contact = () => {
 
                 <div className="contact-form">
                   <Input
-                    label="Subject *"
+                    label={t('subject_label') + ' *'}
                     placeholder="What would you like to discuss?"
                     error={errors.subject?.message}
                     className="border-gray-300 focus:border-[#3182bd] focus:ring-[#3182bd]/20 bg-white text-black placeholder-gray-400"
@@ -313,7 +315,7 @@ const Contact = () => {
 
                 <div className="contact-form">
                   <Textarea
-                    label="Message *"
+                    label={t('message_label') + ' *'}
                     placeholder="Tell me about your project, ideas, or how I can help you..."
                     rows={6}
                     error={errors.message?.message}
@@ -339,7 +341,7 @@ const Contact = () => {
                       </span>
                     ) : (
                       <span className="flex items-center justify-center">
-                        Send Message
+                        {t('sendMessage')}
                         <Send className="ml-2 w-5 h-5" />
                       </span>
                     )}
@@ -379,30 +381,30 @@ const Contact = () => {
               <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-[#3182bd] to-[#7fcdbb] rounded-xl mb-3">
                 <Clock className="w-6 h-6 text-white" />
               </div>
-              <h3 className="font-semibold text-gray-900">Quick Response</h3>
-              <p className="text-sm text-gray-600">Average response time of 24 hours for all inquiries</p>
+              <h3 className="font-semibold text-gray-900">{t('quickResponse')}</h3>
+              <p className="text-sm text-gray-600">{t('quickResponseDesc')}</p>
             </div>
             
             <div className="space-y-2">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-[#e34a33] to-[#edf8b1] rounded-xl mb-3">
                 <ExternalLink className="w-6 h-6 text-white" />
               </div>
-              <h3 className="font-semibold text-gray-900">Global Collaboration</h3>
-              <p className="text-sm text-gray-600">Open to remote projects and international partnerships</p>
+              <h3 className="font-semibold text-gray-900">{t('globalCollaboration')}</h3>
+              <p className="text-sm text-gray-600">{t('globalCollaborationDesc')}</p>
             </div>
             
             <div className="space-y-2">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-[#7fcdbb] to-[#3182bd] rounded-xl mb-3">
                 <Phone className="w-6 h-6 text-white" />
               </div>
-              <h3 className="font-semibold text-gray-900">Professional Support</h3>
-              <p className="text-sm text-gray-600">Dedicated to delivering high-quality solutions</p>
+              <h3 className="font-semibold text-gray-900">{t('professionalSupport')}</h3>
+              <p className="text-sm text-gray-600">{t('professionalSupportDesc')}</p>
             </div>
           </div>
           
           <div className="mt-8 pt-6 border-t border-gray-200 text-center">
             <p className="text-gray-600 text-sm">
-              Ready to collaborate? Let's turn your ideas into impactful solutions.
+              {t('readyToCollaborate')}
             </p>
             <div className="mt-4 flex justify-center space-x-4">
               <a
@@ -410,7 +412,7 @@ const Contact = () => {
                 className="inline-flex items-center px-4 py-2 bg-[#3182bd] hover:bg-[#3182bd]/90 text-white rounded-lg hover:shadow-lg transition-all text-sm font-medium"
               >
                 <Mail className="w-4 h-4 mr-2" />
-                Direct Email
+                {t('directEmail')}
               </a>
               <a
                 href={SOCIAL_LINKS.linkedin}

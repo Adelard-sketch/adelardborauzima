@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import PageNavbar from '@/components/layout/PageNavbar';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Gallery = () => {
+  const { t } = useLanguage();
+  
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   // Real gallery images from your journey
@@ -104,14 +112,14 @@ const Gallery = () => {
             className="inline-block mb-4"
           >
             <span className="bg-[#3182bd] text-white px-6 py-2 rounded-lg font-semibold text-sm shadow-lg font-serif">
-              GALLERY
+              {t('gallery').toUpperCase()}
             </span>
           </motion.div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-serif">
-            My <span className="text-[#e6550d]">Journey</span>
+            {t('myJourney')}
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto font-serif text-justify">
-            Moments captured from my journey around the world: Leadership experiences, global citizenship, creative expression, technology innovation, and community impact. Each image tells a story of growth, service, and dedication to positive change.
+            {t('galleryDescription')}
           </p>
           </div>
         </motion.div>

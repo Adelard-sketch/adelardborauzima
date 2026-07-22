@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
 import { Linkedin, Facebook, Instagram, Github, Mail } from 'lucide-react';
 import { SOCIAL_LINKS } from '@/utils/constants';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer = () => {
+  const { t } = useLanguage();
+  
   const socialIcons = [
     { icon: Linkedin, href: SOCIAL_LINKS.linkedin, label: 'LinkedIn', color: 'hover:text-blue-600' },
     { icon: Facebook, href: SOCIAL_LINKS.facebook, label: 'Facebook', color: 'hover:text-blue-600' },
@@ -22,7 +25,7 @@ const Footer = () => {
             </div>
             <div>
               <span className="font-bold text-lg">Adelard Borauzima</span>
-              <p className="text-blue-200 text-sm">© {new Date().getFullYear()} All rights reserved.</p>
+              <p className="text-blue-200 text-sm">© {new Date().getFullYear()} {t('rightsReserved')}</p>
             </div>
           </div>
 
@@ -48,7 +51,7 @@ const Footer = () => {
         {/* Made with love */}
         <div className="text-center mt-4 pt-4 border-t border-white/20">
           <p className="text-blue-200 text-sm flex items-center justify-center gap-2">
-            Made by in Adelard
+            {t('madeBy')}
           </p>
         </div>
       </div>

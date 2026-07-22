@@ -1,7 +1,7 @@
 export const APP_NAME = 'Adelard Borauziama';
 
 export const SOCIAL_LINKS = {
-  linkedin: 'https://www.linkedin.com/in/adelard-borauzima-a6875b2ab/',
+  linkedin: 'https://www.linkedin.com/in/adelard-borauzima/',
   facebook: 'https://www.facebook.com/share/19N84cSt2m/?mibextid=wwXIfr',
   instagram: 'https://www.instagram.com/a.d.e.l_hnz?igsh=MWphNXZrNHA5M3d3eQ%3D%3D&utm_source=qr',
   github: 'https://github.com/Adelard-sketch',

@@ -1,8 +1,16 @@
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 import { Award, Globe, Heart, Zap, Briefcase, GraduationCap, Users, Lightbulb, Shield, Sword, Mountain, BookOpen, Music, School, UserCheck, Bot } from 'lucide-react';
 import PageNavbar from '@/components/layout/PageNavbar';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const About = () => {
+  const { t } = useLanguage();
+  
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const values = [
     { icon: Heart, title: 'Human-Centered', description: 'Putting people first in everything I create' },
     { icon: Globe, title: 'Global Impact', description: 'Creating change that transcends borders' },
@@ -100,7 +108,7 @@ const About = () => {
                 className="inline-block mb-6"
               >
                 <span className="bg-[#e6550d] text-white px-6 py-2 rounded-lg font-semibold text-sm shadow-lg font-serif">
-                  ABOUT ME
+                  {t('aboutMe').toUpperCase()}
                 </span>
               </motion.div>
 
@@ -110,7 +118,7 @@ const About = () => {
                 transition={{ delay: 0.4 }}
                 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight font-serif"
               >
-                Creative | Social Entrepreneur | Computer Scientist | Global Citizen | Leader & Follower
+                {t('creativeSocialTitle')}
               </motion.h1>
 
               <motion.div
@@ -120,22 +128,15 @@ const About = () => {
                 className="space-y-4 text-gray-600 text-base leading-relaxed font-serif"
               >
                 <p className="text-justify">
-                  I have a deep <span className="font-semibold text-gray-900">passion</span>, for 
-                  <span className="font-semibold text-gray-900"> artistic expression</span>, and 
-                  <span className="font-semibold text-gray-900"> tech </span>
-                  empowering young people globally especially from marginalized communities using a gol in them for healing 
-                  and archieve dreams.
+                  {t('aboutBio1')}
                 </p>
 
                 <p className="text-justify">
-                  As <span className="font-semibold text-[#e6550d]">Co-Founder and CEO of Reliance Sou 
-                  International Youth Foundation</span>, I lead initiatives that promote digital skills, 
-                  self-reliance, entrepreneurship, and community impact across Africa.
+                  {t('aboutBio2')}
                 </p>
 
                 <p className="text-justify">
-                  My work focuses on leveraging innovation, storytelling, and technology to create 
-                  opportunities for youth and drive sustainable social change.
+                  {t('aboutBio3')}
                 </p>
               </motion.div>
             </div>
@@ -169,16 +170,11 @@ const About = () => {
         >
           <div className="space-y-4 text-gray-600 text-base leading-relaxed font-serif">
             <p className="text-justify">
-              I am a <span className="font-semibold text-[#e6550d]">Melton Foundation Fellow</span> and 
-              a <span className="font-semibold text-[#e6550d]">Global Fellow of GHEA21</span>, and I 
-              previously served as a representative on the 
-              <span className="font-semibold text-[#e6550d]"> Mastercard Foundation Scholars Council</span>.
+              {t('aboutMission1')}
             </p>
 
             <p className="text-justify">
-              Through my work, I strive to build innovative solutions that create opportunities for 
-              youth and drive social impact across Africa, using technology and art as tools for empowerment 
-              and positive change.
+              {t('aboutMission2')}
             </p>
           </div>
         </motion.div>
@@ -190,7 +186,7 @@ const About = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="w-full max-w-6xl"
         >
-          <h2 className="text-3xl font-bold text-white text-center mb-6 font-serif">Experience & Roles</h2>
+          <h2 className="text-3xl font-bold text-white text-center mb-6 font-serif">{t('experienceRoles')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {experiences.map((exp, index) => (
               <motion.div
@@ -223,7 +219,7 @@ const About = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="w-full max-w-6xl pb-12"
         >
-          <h2 className="text-3xl font-bold text-white text-center mb-6 font-serif">Core Values</h2>
+          <h2 className="text-3xl font-bold text-white text-center mb-6 font-serif">{t('coreValues')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {values.map(({ icon: Icon, title, description }, index) => (
               <motion.div
