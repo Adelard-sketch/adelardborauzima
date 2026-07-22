@@ -4,7 +4,7 @@ import { Linkedin, Facebook, Instagram, Github, Mail, Twitter, Download } from '
 import { useRef, useEffect, useState } from 'react';
 import Button from '@/components/ui/Button';
 import { FadeIn } from '@/components/animations/AnimatedText';
-import { NAV_LINKS, SOCIAL_LINKS } from '@/utils/constants';
+import { SOCIAL_LINKS } from '@/utils/constants';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 

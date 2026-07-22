@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Download } from 'lucide-react';
-import { NAV_LINKS } from '@/utils/constants';
 import { cn } from '@/utils/cn';
 import { useLanguage } from '@/contexts/LanguageContext';
 
