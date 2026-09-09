@@ -284,11 +284,9 @@ const Home = () => {
               >
                 <motion.button
                   onClick={() => {
-                    // Create a direct link to the PDF and trigger download
                     const link = document.createElement('a');
                     link.href = '/doc/adelCV.pdf';
                     link.download = 'Adelard_Borauzima_CV.pdf';
-                    link.target = '_blank';
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
