@@ -285,7 +285,7 @@ const Home = () => {
                 <motion.button
                   onClick={() => {
                     const link = document.createElement('a');
-                    link.href = '/doc/adelCV.pdf';
+                    link.href = '/doc/adelard_cv.pdf';
                     link.download = 'Adelard_Borauzima_CV.pdf';
                     document.body.appendChild(link);
                     link.click();
